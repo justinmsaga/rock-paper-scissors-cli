@@ -1,0 +1,15 @@
+{
+  "name": "first_node",
+  "version": "1.0.0",
+  "description": "first play",
+  "license": "ISC",
+  "author": "ms@ga",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "play": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
