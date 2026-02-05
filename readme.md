@@ -1,10 +1,21 @@
-# rock paper scissors cli
+# Rock Paper Scissors CLI
 
 with any version of node
 
-1. add to computer bin with
+## run with node
 
-```console
+1. clone repo
+2. run in folder
+
+```
+node index.js [rock|paper|scissors]
+```
+
+## add to command line
+
+1. add to computer bins
+
+```
 npm link
 ```
 
