@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { play } from "./play.js";
-console.log("hello ms@ga");
+console.log("hello friend");
+import "./src/commands.js";
 
-const element = process.argv[2];
-play(element);
-console.log("end");
+//const element = process.argv[2];
+//play(element);
+//console.log(global);
