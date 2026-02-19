@@ -19,7 +19,7 @@ yargs(hideBin(process.argv))
   .option("mode", {
     alias: "m",
     type: "number",
-    description: "0 -> regular |  greater than 0 -> fire/water",
+    description: "0 -> regular |  >0 -> fire/water",
     default: 0,
   })
 

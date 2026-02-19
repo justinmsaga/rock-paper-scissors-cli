@@ -2,69 +2,81 @@
 const agent = {
   element: "",
   win: "",
-  update(e, w) {
-    this.element = e;
-    this.win = w;
+  update(ruleSet, selection) {
+    [this.element, this.win] = ruleSet.find(
+      (rule) => selection < rule.max,
+    ).value;
   },
 };
 
+//random num generator between 1 - max
 function selector(max) {
   return Math.floor(Math.random() * max);
 }
 
-function updateAgent(mode) {
-  //randon num generator between 1 - 90
+//mode = 0 - fire/water | mode > 0 - regular rps
+function updatedAgent(mode) {
   const selection = mode ? selector(101) : selector(91);
-  console.log(selection);
-  console.log(`mode: ${mode}`);
   if (mode) {
-    if (selection < 33) {
-      agent.update("fire", ["water"]);
-    } else if (selection < 44) {
-      agent.update("rock", ["paper", "fire"]);
-    } else if (selection < 55) {
-      agent.update("paper", ["scissors", "fire"]);
-    } else if (selection < 66) {
-      agent.update("scissors", ["rock", "fire"]);
-    } else {
-      agent.update("water", ["scissors", "rock", "paper"]);
-    }
+    const rules = [
+      { max: 33, value: ["fire", ["water"]] },
+      { max: 44, value: ["rock", ["fire", "paper"]] },
+      { max: 55, value: ["paper", ["fire", "scissors"]] },
+      { max: 66, value: ["scissors", ["fire", "rock"]] },
+      { max: Infinity, value: ["water", ["rock", "paper", "scissors"]] },
+    ];
+    agent.update(rules, selection);
   } else {
-    if (selection < 30) {
-      agent.update("rock", ["paper"]);
-    } else if (selection > 30 && selection < 60) {
-      agent.update("paper", ["scissors"]);
-    } else {
-      agent.update("scissors", ["rock"]);
-    }
+    const rules = [
+      { max: 30, value: ["rock", ["paper"]] },
+      { max: 60, value: ["paper", ["scissors"]] },
+      { max: Infinity, value: ["scissors", ["rock"]] },
+    ];
+    agent.update(rules, selection);
   }
 }
 
+//set result text options
+const result = {
+  rock: {
+    win: "you crushed",
+    lose: "you cracked",
+  },
+  paper: {
+    win: "you covered it",
+    lose: "you ripped",
+  },
+  scissors: {
+    win: "you cut it",
+    lose: "you broke",
+  },
+};
+
 //compare and find winner
 function winner(player, mode) {
-  updateAgent(mode);
+  updatedAgent(mode);
 
   return player === agent.element
-    ? "draw"
+    ? "result: draw"
     : agent.win.includes(player)
-      ? "you win"
-      : "you lose";
+      ? `result: ${result[player].win}`
+      : `result: ${result[player].lose}`;
 }
 
 //game loop
 export function play(element, mode) {
+  console.log("hello friend");
   console.log(`${winner(element, mode)}`);
   console.log(`agent: ${elementEmoji(agent.element)}`);
 }
 
 function elementEmoji(element) {
-  return element === "rock"
-    ? "🗿"
-    : element === "paper"
-      ? "🧻"
-      : element === "scissors"
-        ? "✂️"
-        : element === "fire"
-          ? "🔥"
-          : "🌊";
+  const emoji = {
+    rock: "🗿",
+    paper: "🧻",
+    scissors: "✂️",
+    fire: "🔥",
+    water: "🌊",
+  };
+  return emoji[element];
 }
