@@ -1,6 +1,6 @@
 # Rock Paper Scissors CLI
 
-with any version of node
+node version: >12
 
 ## run with node
 
