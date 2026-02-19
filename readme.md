@@ -22,10 +22,11 @@ npm link
 2. run using
 
 ```
-play [your element]
+play start [rock | paper | scissors]
 ```
 
 3. for additional commands
+
 ```
 play --help
 ```
