@@ -24,3 +24,8 @@ npm link
 ```
 play [your element]
 ```
+
+3. for additional commands
+```
+play --help
+```
